@@ -1,0 +1,26 @@
+{
+  "name": "cypress-saucedemo-tests",
+  "version": "1.0.0",
+  "description": "Cypress test automation for SauceDemo app",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "test:headed": "cypress run --headed",
+    "test:task1": "cypress run --spec 'cypress/e2e/task1.cy.js'",
+    "test:task2": "cypress run --spec 'cypress/e2e/task2.cy.js'",
+    "test:task3": "cypress run --spec 'cypress/e2e/task3.cy.js'"
+  },
+  "keywords": [
+    "cypress",
+    "e2e",
+    "testing",
+    "saucedemo"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.0.0",
+    "dotenv": "^17.4.2"
+  }
+}

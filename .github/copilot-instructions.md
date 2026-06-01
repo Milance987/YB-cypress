@@ -1,0 +1,9 @@
+- [x] Verify that the copilot-instructions.md file in the .github directory is created.
+- [x] Clarify Project Requirements - Cypress test automation with POM, SauceDemo app
+- [x] Scaffold the Project
+- [x] Customize the Project - Page Objects, tests, configuration
+- [x] Install Required Extensions - N/A (Cypress CLI only)
+- [x] Compile the Project - npm install completed
+- [x] Create and Run Task - Ready to run
+- [ ] Launch the Project
+- [ ] Ensure Documentation is Complete

@@ -9,7 +9,9 @@
     "test:headed": "cypress run --headed",
     "test:task1": "cypress run --spec 'cypress/e2e/task1.cy.js'",
     "test:task2": "cypress run --spec 'cypress/e2e/task2.cy.js'",
-    "test:task3": "cypress run --spec 'cypress/e2e/task3.cy.js'"
+    "test:task3": "cypress run --spec 'cypress/e2e/task3.cy.js'",
+    "test:ci:ui": "cypress run --headless --browser electron --spec 'cypress/e2e/task1.cy.js,cypress/e2e/task1_multi_domain_navigation.cy.js,cypress/e2e/task2.cy.js' --reporter junit --reporter-options 'mochaFile=cypress/results/ui-[hash].xml,toConsole=true'",
+    "test:ci:api": "cypress run --headless --browser electron --spec 'cypress/e2e/task3.cy.js' --reporter junit --reporter-options 'mochaFile=cypress/results/api-[hash].xml,toConsole=true'"
   },
   "keywords": [
     "cypress",
@@ -21,6 +23,7 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.0.0",
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "mocha-junit-reporter": "^2.2.1"
   }
 }

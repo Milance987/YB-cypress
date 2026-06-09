@@ -1,0 +1,94 @@
+# @format
+
+name: Cypress CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ui-suite:
+    name: UI Suite (Headless)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BASE_URL: https://www.saucedemo.com
+      USERNAME: standard_user
+      PASSWORD: secret_sauce
+      REQRES_BASE_URL: https://reqres.in
+      REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress UI suite (headless)
+        run: npm run test:ci:ui
+
+      - name: Upload UI JUnit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-report-ui
+          path: cypress/results/ui-*.xml
+          if-no-files-found: warn
+
+      - name: Upload UI screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots-ui
+          path: cypress/screenshots
+          if-no-files-found: ignore
+
+  api-suite:
+    name: API Suite (Headless)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BASE_URL: https://www.saucedemo.com
+      USERNAME: standard_user
+      PASSWORD: secret_sauce
+      REQRES_BASE_URL: https://reqres.in
+      REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress API suite (headless)
+        run: npm run test:ci:api
+
+      - name: Upload API JUnit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-report-api
+          path: cypress/results/api-*.xml
+          if-no-files-found: warn
+
+      - name: Upload API screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots-api
+          path: cypress/screenshots
+          if-no-files-found: ignore
